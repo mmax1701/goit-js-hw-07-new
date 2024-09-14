@@ -23,16 +23,17 @@ function onClick(evt) {
     evt.preventDefault();
 
     const imgUrl = evt.target.dataset.source
-        const instance = basicLightbox.create(`<img src="${imgUrl}" width="800" height="600">`)
+    const instance = basicLightbox.create(`<img src="${imgUrl}" width="800" height="600">`)
 
     instance.show()
 
-    // if (evt) {
+    document.addEventListener('keydown', onPress)
 
-    //     const imgUrl = evt.target.querySelector('.gallery__image').dataset.source
-    //     const instance = basicLightbox.create(`<img src="${imgUrl}" width="800" height="600">`)
-
-    // instance.show()
-    // }
+    function onPress(evt) {
+        if (evt.code === "Escape") {
+            instance.close()
+            document.removeEventListener('keydown', onPress)
+        }
+    }
 }
 
